@@ -15,5 +15,5 @@ name = "Joca da Silva"
 age = 35
 
 print(f"Olá {name}, você tem {age} anos.")
-print("Olá", name, ", você tem", age, "anos.")
 print("Olá " + name + ", você tem " + str(age) + " anos.")
+print("Olá", name, ", você tem", age, "anos.")
