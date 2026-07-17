@@ -28,3 +28,7 @@ print(type(inteiro))
 print(type(decimal))
 print(type(booleano))
 
+entrada = int(input("digite um número: "))
+
+if type(entrada) == int:
+    print("O tipo não é 'string'")
