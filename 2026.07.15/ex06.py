@@ -16,3 +16,21 @@ Caso contrário:
 
 	Estoque insuficiente. 
 '''
+
+estoque = 15
+quantidade_solicitada = 10
+
+if quantidade_solicitada <= estoque:
+    print("Pedido aprovado")
+else:
+    print("Pedido excede estoque")
+
+print()
+
+quantidade_solicitada = int(input("Digite a quantidade solicitada: "))
+
+if quantidade_solicitada <= estoque:
+    print("Pedido aprovado")
+else:
+    print("Estoque insuficiente")
+    
