@@ -24,10 +24,11 @@ ou
 '''
 
 
-idade = 65
+idade = 25
 estudante = False
 
-if idade >= 60 or estudante:
+#     False          False   OR → False
+if idade >= 60 or estudante == True:
     print("Tem direito ao desconto.")
 else:
     print("Não tem direito ao desconto.")
