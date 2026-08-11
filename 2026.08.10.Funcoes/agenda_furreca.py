@@ -8,8 +8,6 @@
 import subprocess
 import random
 
-# numero = random.randint(1, 1000)
-
 # Baco de dados
 database = {
     "1": { "name": "Joca da Silva", "contact": "(21) 998877665"},
