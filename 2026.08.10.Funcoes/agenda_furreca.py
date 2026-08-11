@@ -5,8 +5,10 @@
 # By Luferat - https://github.xonm/Luferat #
 ############################################
 
+# Importa "subprocess" que permite executar comandos do sistema
 import subprocess
 import random
+import os
 
 # Banco de dados em memória (dict)
 database = {
@@ -14,9 +16,14 @@ database = {
     "120": { "name": "Mariana Sirilampo", "contact": "mariana@sirilampo.com.br"}
 }
 
-# Limpa a tela com o cmando "cls" do Windows
+# Limpa a tela
 def cls():
-    subprocess.run("cls", shell=True)
+    if os.name == "nt":
+        # Se o sistema é Windows
+        subprocess.run("cls", shell=True)
+    else:
+        # Outros sistemas como Linux e MacOS
+        subprocess.run("clear", shell=True)
 
 # Cadastra novo contato
 def new_contact():
