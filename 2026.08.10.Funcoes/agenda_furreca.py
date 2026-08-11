@@ -102,11 +102,6 @@ def main(erro = str()):
         # Cabeçalho
         print("[ AGENDA FURRECA - MENU PRINCIPAL ]")
 
-        # Exibe mensagem de erro ao escolhar uma opção inválida
-        if erro:
-            print("-----", erro, "-----")
-        erro = str()
-
         # Exibe menu principal
         print('''
 Opções:
@@ -118,6 +113,10 @@ Opções:
 0 - Sair do programa
     ''')
 
+        # Exibe mensagem de erro se existir
+        if erro:
+            print("-----", erro, "-----")
+            
         # Recebe opção do usuário
         opcao = input("Escolha uma opção: ")
 
