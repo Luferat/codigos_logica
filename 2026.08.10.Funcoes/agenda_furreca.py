@@ -38,8 +38,15 @@ def new_contact():
 def list_contacts():
     cls()
     print("[ AGENDA FURRECA - LISTA CONTATOS ]")
+    print()
+    print(len(database), "usuários encontrados!")
+    print()
 
-    # ...
+    for key, value in database.items():
+        print("ID:", key)
+        print("\t• Nome:", value['name'])
+        print("\t• Contato:", value['contact'])
+        print()
     
     input("Tecle [Enter] para continuar")
     main()
@@ -71,8 +78,6 @@ def main(erro = str()):
         if erro:
             print(erro)
         erro = str()
-        # Debug
-        print(database)
         print('''
 Opções:
 
