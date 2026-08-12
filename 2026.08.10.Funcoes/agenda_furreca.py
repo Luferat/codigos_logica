@@ -5,18 +5,22 @@
 # By Luferat - https://github.xonm/Luferat #
 ############################################
 
-# Importa "subprocess" que permite executar comandos do sistema
+# Importa "subprocess" e "os" que permitem executar comandos do sistema
 import subprocess
-import random
 import os
+
+# Importa "random" para gerar números aleatórios
+import random
 
 # Banco de dados em memória (dict)
 database = {
-    "1": { "name": "Joca da Silva", "contact": "(21) 998877665"},
-    "120": { "name": "Mariana Sirilampo", "contact": "mariana@sirilampo.com.br"}
+    "1": {"name": "Joca da Silva", "contact": "(21) 998877665"},
+    "120": {"name": "Mariana Sirilampo", "contact": "mariana@sirilampo.com.br"}
 }
 
 # Limpa a tela
+
+
 def cls():
     if os.name == "nt":
         # Se o sistema é Windows
@@ -26,6 +30,8 @@ def cls():
         subprocess.run("clear", shell=True)
 
 # Cadastra novo contato
+
+
 def new_contact():
     # Limpa a tela
     cls()
@@ -42,7 +48,7 @@ def new_contact():
     key = str(random.randint(1, 1000))
 
     # Salva o novo cadastro no formato "dict"
-    database[key] = dict(name = name, contact = contact)
+    database[key] = dict(name=name, contact=contact)
 
     # Confirmação
     print(f"\nUsuário com ID {key} adicionado!")
@@ -52,6 +58,8 @@ def new_contact():
     main()
 
 # Lista todos os registros
+
+
 def list_contacts():
     # Limpa a tela
     cls()
@@ -66,38 +74,39 @@ def list_contacts():
     for key, value in database.items():
         # Formata a saída
         print("ID:", key)
-        print("\t• Nome:", value['name'])
-        print("\t• Contato:", value['contact'])
+        print(" • Nome:", value['name'])
+        print(" • Contato:", value['contact'])
         print()
 
     # Confirma e chama o menu principal
     input("Tecle [Enter] para continuar")
     main()
 
+
 def edit_contact():
     cls()
     print("[ AGENDA FURRECA - EDITA CONTATO ]")
 
     # ...
-    
+
     input("Tecle [Enter] para continuar")
     main()
+
 
 def delete_contact():
     cls()
     print("[ AGENDA FURRECA - APAGA CONTATO ]")
 
     # ...
-    
+
     input("Tecle [Enter] para continuar")
     main()
 
-# Programa principal
-def main(erro = str()):
-    # Main loop
+def main(erro=str()):
+    # Programa principal e "main loop"
     while True:
         # Limpa a tela
-        cls() 
+        cls()
 
         # Cabeçalho
         print("[ AGENDA FURRECA - MENU PRINCIPAL ]")
@@ -116,7 +125,7 @@ Opções:
         # Exibe mensagem de erro se existir
         if erro:
             print("-----", erro, "-----")
-            
+
         # Recebe opção do usuário
         opcao = input("Escolha uma opção: ")
 
@@ -140,5 +149,6 @@ Opções:
                 erro = "Digite uma opção válida!"
                 main(erro)
 
+
 # "Roda" o programa
-main()     
+main()
