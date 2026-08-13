@@ -1,7 +1,7 @@
 ############################################
 # 2026.08.10.Funcoes\agenda_furreca.py     #
 # AGENDA FURRECA.PY                        #
-# Versão 2026.08.10                        #
+# Versão 2026.08.11                        #
 # By Luferat - https://github.xonm/Luferat #
 ############################################
 
@@ -12,16 +12,12 @@ import os
 # Importa "random" para gerar números aleatórios
 import random
 
-# Banco de dados em memória (dict)
-database = {
-    "1": {"name": "Joca da Silva", "contact": "(21) 998877665"},
-    "120": {"name": "Mariana Sirilampo", "contact": "mariana@sirilampo.com.br"}
-}
-
-# Limpa a tela
+# Banco de dados em memória (dict) (Moch)
+database = {}
 
 
 def cls():
+    # Limpa a tela
     if os.name == "nt":
         # Se o sistema é Windows
         subprocess.run("cls", shell=True)
@@ -29,10 +25,9 @@ def cls():
         # Outros sistemas como Linux e MacOS
         subprocess.run("clear", shell=True)
 
-# Cadastra novo contato
-
 
 def new_contact():
+    # Cadastra novo contato
     # Limpa a tela
     cls()
 
@@ -41,11 +36,26 @@ def new_contact():
     print("\nDigite os dados do contato:\n")
 
     # Recebe os dados do usuário
-    name = input(" • Nome: ")
-    contact = input(" • Contato: ")
 
-    # Gera o ID aleatório
-    key = str(random.randint(1, 1000))
+    # Recebe e valida o "name"
+    while True:
+        name = input(" • Nome: ")
+        if name.strip() != "":
+            break
+        print("-----", "Digite um nome válido!", "-----")
+
+    # Recebe e valida o "contact"
+    while True:
+        contact = input(" • Contato: ")
+        if contact.strip() != "":
+            break
+        print("-----", "Digite um contato válido!", "-----")
+
+    # Gera o ID aleatório e não repetido
+    while True:
+        key = str(random.randint(1, 1000))
+        if key not in database:
+            break
 
     # Salva o novo cadastro no formato "dict"
     database[key] = dict(name=name, contact=contact)
@@ -57,10 +67,9 @@ def new_contact():
     # Chama o menu principal
     main()
 
-# Lista todos os registros
-
 
 def list_contacts():
+    # Lista todos os registros
     # Limpa a tela
     cls()
 
@@ -87,8 +96,40 @@ def edit_contact():
     cls()
     print("[ AGENDA FURRECA - EDITA CONTATO ]")
 
-    # ...
+    print()
+    while True:
+        key = input("Digite o ID do usuário: ")
+        if key in database:
+            break
+        print("-----", "ID não encontrado!", "-----")
 
+    print()
+    print("ID:", key)
+    print(" • Nome:", database[key]['name'])
+    print(" • Contato:", database[key]['contact'])
+    print()
+
+    print("Digite os novos dados:")
+
+    # Recebe e valida o "name"
+    while True:
+        name = input(" • Nome: ")
+        if name.strip() != "":
+            break
+        print("-----", "Digite um nome válido!", "-----")
+
+    # Recebe e valida o "contact"
+    while True:
+        contact = input(" • Contato: ")
+        if contact.strip() != "":
+            break
+        print("-----", "Digite um contato válido!", "-----")
+
+    # Atualizar
+    database[key] = dict(name=name, contact=contact)
+
+    print()
+    print("Contato atualizado!")
     input("Tecle [Enter] para continuar")
     main()
 
@@ -97,12 +138,32 @@ def delete_contact():
     cls()
     print("[ AGENDA FURRECA - APAGA CONTATO ]")
 
-    # ...
+    print()
+    while True:
+        key = input("Digite o ID do usuário: ")
+        if key in database:
+            break
+        print("-----", "ID não encontrado!", "-----")
+
+    print()
+    print("ID:", key)
+    print(" • Nome:", database[key]['name'])
+    print(" • Contato:", database[key]['contact'])
+    print()
+
+    option = input("Tem certeza que deseja apagar [S/N]? ")
+    if option.upper() == "S":
+        del database[key]
+        print("Contato apagado!")
+    else:
+        print()
+        print("Não aconteceu nada!")
 
     input("Tecle [Enter] para continuar")
     main()
 
-def main(erro=str()):
+
+def main(error=str()):
     # Programa principal e "main loop"
     while True:
         # Limpa a tela
@@ -122,9 +183,9 @@ Opções:
 0 - Sair do programa
     ''')
 
-        # Exibe mensagem de erro se existir
-        if erro:
-            print("-----", erro, "-----")
+        # Exibe mensagem de error se existir
+        if error:
+            print("-----", error, "-----")
 
         # Recebe opção do usuário
         opcao = input("Escolha uma opção: ")
@@ -146,9 +207,18 @@ Opções:
                 exit()
             case _:
                 # Se escolheu uma opção inválida, chama o menu novamente, mas, com a mensagem de erro.
-                erro = "Digite uma opção válida!"
-                main(erro)
+                error = "Digite uma opção válida!"
+                main(error)
 
 
 # "Roda" o programa
 main()
+
+'''
+DESAFIOS:
+ • BÁSICO: adicionar seus comentários no código
+ • BÁSICO: alterar / melhorar a interface
+ • INTERMEDIÁRIO: Salvar os dados de forma persistente em um arquivo JSON 
+ • AVANÇADO: salvar os dados de forma persistente em um banco de dados SQL como o SQLite
+ • AVANÇADO: marcar o registro como "apagado" em vez de apagar realmente
+'''
